@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import getWords from '../utils/getWords';
 
 interface word {
 	text: string;
@@ -28,26 +29,20 @@ const TextField: React.FC<Props> = ({
 		text: '',
 		isRight: true,
 	});
-
 	const [totalWords, setTotalWords] = useState<number>(0);
-
-	const initialWords: string[] = [
-		'mouse',
-		'chair',
-		'trimmer',
-		'word',
-		'toilet',
-	];
+	const [wordsData, setWordsData] = useState<wordsData>({
+		prev: [],
+		current: '',
+		next: [],
+	});
 
 	useEffect(() => {
 		setAccuracy(rightWords / (totalWords || Infinity));
-	}, [totalWords, rightWords]);
+	}, [totalWords, rightWords, setAccuracy]);
 
-	const [wordsData, setWordsData] = useState<wordsData>({
-		prev: [],
-		current: initialWords[0],
-		next: initialWords.slice(1),
-	});
+	useEffect(() => {
+		getWords().then(setWordsData);
+	}, []);
 
 	const isWordRight = (word: string, reference: string) => {
 		for (let i = 0; i < word.length; i++) {
@@ -58,26 +53,28 @@ const TextField: React.FC<Props> = ({
 
 	const changeText = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setIsStarted(true);
-		if (event.target.value.at(-1) === ' ') {
-			setWordsData((prevData: wordsData) => ({
-				prev: [...prevData.prev, text],
-				current: prevData.next[0],
-				next: prevData.next.slice(1),
-			}));
-			setText({
-				text: '',
-				isRight: true,
-			});
-			setRightWords(
-				(prev: number) => prev + (wordsData.current === text.text ? 1 : 0)
-			);
-			setTotalWords((prev: number) => prev + 1);
-		} else {
-			setText({
-				text: event.target.value,
-				isRight: isWordRight(event.target.value, wordsData.current),
-			});
-			setText((prevText) => ({ ...prevText, text: event.target.value }));
+		if (event.target.value !== ' ') {
+			if (event.target.value.at(-1) === ' ') {
+				setWordsData((prevData: wordsData) => ({
+					prev: [...prevData.prev, text],
+					current: prevData.next[0],
+					next: prevData.next.slice(1),
+				}));
+				setText({
+					text: '',
+					isRight: true,
+				});
+				setRightWords(
+					(prev: number) => prev + (wordsData.current === text.text ? 1 : 0)
+				);
+				setTotalWords((prev: number) => prev + 1);
+			} else {
+				setText({
+					text: event.target.value,
+					isRight: isWordRight(event.target.value, wordsData.current),
+				});
+				setText((prevText) => ({ ...prevText, text: event.target.value }));
+			}
 		}
 	};
 
