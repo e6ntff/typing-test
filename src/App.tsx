@@ -4,6 +4,18 @@ import TextField from './components/TextField';
 import Options from './components/Options';
 import NoMobile from './components/NoMobile';
 import GameEnding from './components/GameEnding';
+import getWords from './utils/getWords';
+
+interface word {
+	text: string;
+	isRight: boolean;
+}
+
+interface words {
+	prev: word[];
+	current: string;
+	next: string[];
+}
 
 const App: React.FC = () => {
 	const [initialSeconds, setInitialSeconds] = useState<number>(60);
@@ -12,6 +24,18 @@ const App: React.FC = () => {
 	const [isStarted, setIsStarted] = useState<boolean>(false);
 	const [isEnded, setIsEnded] = useState<boolean>(false);
 	const [accuracy, setAccuracy] = useState<number>(1);
+	const [wordsData, setWordsData] = useState<words>({
+		prev: [],
+		current: '',
+		next: [],
+	});
+	
+	useEffect(() => {
+		setIsStarted(false);
+		setRightWords(0);
+		setSeconds(initialSeconds);
+		getWords().then(setWordsData);
+	}, [initialSeconds]);
 
 	useEffect(() => {
 		const timerId = isStarted
@@ -51,6 +75,8 @@ const App: React.FC = () => {
 							setRightWords={setRightWords}
 							setIsStarted={setIsStarted}
 							setAccuracy={setAccuracy}
+							wordsData={wordsData}
+							setWordsData={setWordsData}
 						/>
 					</>
 				) : (
