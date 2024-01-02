@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+interface word {
+	text: string;
+	isRight: boolean;
+}
 
 interface wordsData {
-	prev: { text: string; isRight: boolean }[];
+	prev: word[];
 	current: string;
 	next: string[];
 }
 
-const TextField: React.FC = () => {
-	const [text, setText] = useState<{ text: string; isRight: boolean }>({
+interface Props {
+	rightWords: number;
+	setRightWords: any;
+	setIsStarted: (arg0: boolean) => void;
+	setAccuracy: (arg0: number) => void;
+}
+
+const TextField: React.FC<Props> = ({
+	rightWords,
+	setRightWords,
+	setIsStarted,
+	setAccuracy,
+}) => {
+	const [text, setText] = useState<word>({
 		text: '',
 		isRight: true,
 	});
+
+	const [totalWords, setTotalWords] = useState<number>(0);
 
 	const initialWords: string[] = [
 		'mouse',
@@ -19,6 +38,10 @@ const TextField: React.FC = () => {
 		'word',
 		'toilet',
 	];
+
+	useEffect(() => {
+		setAccuracy(rightWords / totalWords || 1);
+	}, [totalWords]);
 
 	const [wordsData, setWordsData] = useState<wordsData>({
 		prev: [],
@@ -34,6 +57,7 @@ const TextField: React.FC = () => {
 	};
 
 	const changeText = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setIsStarted(true);
 		if (event.target.value.at(-1) === ' ') {
 			setWordsData((prevData: wordsData) => ({
 				prev: [...prevData.prev, text],
@@ -44,6 +68,10 @@ const TextField: React.FC = () => {
 				text: '',
 				isRight: true,
 			});
+			setRightWords(
+				(prev: number) => prev + (wordsData.current === text.text ? 1 : 0)
+			);
+			setTotalWords((prev: number) => prev + 1);
 		} else {
 			setText({
 				text: event.target.value,
