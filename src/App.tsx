@@ -3,12 +3,14 @@ import Header from './components/Header';
 import TextField from './components/TextField';
 import Options from './components/Options';
 import NoMobile from './components/NoMobile';
+import GameEnding from './components/GameEnding';
 
 const App: React.FC = () => {
 	const [initialSeconds, setInitialSeconds] = useState<number>(60);
 	const [seconds, setSeconds] = useState<number>(initialSeconds);
 	const [rightWords, setRightWords] = useState<number>(0);
 	const [isStarted, setIsStarted] = useState<boolean>(false);
+	const [isEnded, setIsEnded] = useState<boolean>(false);
 	const [accuracy, setAccuracy] = useState<number>(1);
 
 	useEffect(() => {
@@ -19,6 +21,7 @@ const App: React.FC = () => {
 			: '';
 		if (seconds === 0) {
 			clearInterval(timerId);
+			setIsEnded(true);
 		}
 		return () => {
 			clearInterval(timerId);
@@ -41,12 +44,20 @@ const App: React.FC = () => {
 					rightWords={rightWords}
 					accuracy={accuracy}
 				/>
-				<TextField
-					rightWords={rightWords}
-					setRightWords={setRightWords}
-					setIsStarted={setIsStarted}
-					setAccuracy={setAccuracy}
-				/>
+				{!isEnded ? (
+					<TextField
+						rightWords={rightWords}
+						setRightWords={setRightWords}
+						setIsStarted={setIsStarted}
+						setAccuracy={setAccuracy}
+					/>
+				) : (
+					<GameEnding
+						rightWords={rightWords}
+						accuracy={accuracy}
+						initialSeconds={initialSeconds}
+					/>
+				)}
 			</div>
 		</>
 	);
