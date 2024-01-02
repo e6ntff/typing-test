@@ -6,6 +6,10 @@
 	box-sizing: border-box;
 }
 
+html, body, #root {
+	height: 100vh;
+}
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
