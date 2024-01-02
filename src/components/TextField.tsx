@@ -40,8 +40,8 @@ const TextField: React.FC<Props> = ({
 	];
 
 	useEffect(() => {
-		setAccuracy(rightWords / totalWords || 1);
-	}, [totalWords]);
+		setAccuracy(rightWords / (totalWords || Infinity));
+	}, [totalWords, rightWords]);
 
 	const [wordsData, setWordsData] = useState<wordsData>({
 		prev: [],
