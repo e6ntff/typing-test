@@ -73,7 +73,7 @@ const TextField: React.FC<Props> = ({
 	};
 
 	return (
-		<label className='w-full h-10 flex'>
+		<label className='w-full h-16 flex'>
 			<div className='w-1/2 h-full flex justify-end items-center font-montserrat font-normal text-5xl'>
 				{wordsData.prev.map((el) => (
 					<span
