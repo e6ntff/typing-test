@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import TextField from './components/TextField';
 import Options from './components/Options';
+import NoMobile from './components/NoMobile';
 
 const App: React.FC = () => {
 	const [initialSeconds, setInitialSeconds] = useState<number>(60);
@@ -30,6 +31,7 @@ const App: React.FC = () => {
 
 	return (
 		<>
+			<NoMobile />
 			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full bg-yellow-100'>
 				<Header />
 				<Options
