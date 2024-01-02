@@ -37,20 +37,22 @@ const App: React.FC = () => {
 			<NoMobile />
 			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full bg-yellow-100'>
 				<Header />
-				<Options
-					seconds={seconds}
-					initialSeconds={initialSeconds}
-					setInitialSeconds={setInitialSeconds}
-					rightWords={rightWords}
-					accuracy={accuracy}
-				/>
 				{!isEnded ? (
-					<TextField
-						rightWords={rightWords}
-						setRightWords={setRightWords}
-						setIsStarted={setIsStarted}
-						setAccuracy={setAccuracy}
-					/>
+					<>
+						<Options
+							seconds={seconds}
+							initialSeconds={initialSeconds}
+							setInitialSeconds={setInitialSeconds}
+							rightWords={rightWords}
+							accuracy={accuracy}
+						/>
+						<TextField
+							rightWords={rightWords}
+							setRightWords={setRightWords}
+							setIsStarted={setIsStarted}
+							setAccuracy={setAccuracy}
+						/>
+					</>
 				) : (
 					<GameEnding
 						rightWords={rightWords}
