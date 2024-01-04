@@ -59,7 +59,7 @@ const App: React.FC = () => {
 	return (
 		<>
 			<NoMobile />
-			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full bg-yellow-100'>
+			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full bg-bg'>
 				<Header />
 				{!isEnded ? (
 					<>

@@ -74,7 +74,10 @@ const TextField: React.FC<Props> = ({
 
 	return (
 		<label className='w-full h-16 flex'>
-			<div className='w-1/2 h-full flex justify-end items-center font-montserrat font-normal text-5xl'>
+			<div
+				className='w-1/2 h-full flex justify-end items-center 
+				font-montserrat font-normal text-5xl text-accent'
+			>
 				{wordsData.prev.map((el) => (
 					<span
 						key={Math.random()}
@@ -88,7 +91,7 @@ const TextField: React.FC<Props> = ({
 				<input
 					type='text'
 					autoFocus
-					className={`w-full h-full font-montserrat font-normal text-5xl outline-none bg-transparent ${
+					className={`w-full h-full font-montserrat font-normal text-5xl text-accent outline-none bg-transparent ${
 						!text.isRight && 'line-through text-red-700'
 					}`}
 					value={text.text}
@@ -96,7 +99,7 @@ const TextField: React.FC<Props> = ({
 				/>
 				<div
 					className='absolute inset-0 w-full h-full font-montserrat font-normal text-5xl 
-					flex justify-start items-center text-nowrap overflow-hidden'
+					flex justify-start items-center text-nowrap overflow-hidden text-accent'
 				>
 					<span className='opacity-25'>{wordsData.current}</span>
 					<span>&nbsp;{wordsData.next.join(' ')}</span>

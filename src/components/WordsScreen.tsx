@@ -7,7 +7,7 @@ interface Props {
 
 const WordsScreen: React.FC<Props> = ({ rightWords, accuracy }) => {
 	return (
-		<span className='font-semibold text-5xl'>
+		<span className='font-semibold text-5xl text-accent'>
 			{rightWords}&nbsp;words/{Math.round(accuracy * 100)}%
 		</span>
 	);
