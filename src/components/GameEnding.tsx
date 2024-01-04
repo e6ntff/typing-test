@@ -18,8 +18,8 @@ const GameEnding: React.FC<Props> = ({
 				accuracy {Math.round(accuracy * 100)}%
 			</span>
 			<button
-				className='w-32 h-16 bg-main text-xl flex justify-center items-center
-				 uppercase font-montserrat font-semibold rounded-lg'
+				className='w-32 h-16 border-accent border-2 text-xl flex justify-center items-center
+				 uppercase font-montserrat font-semibold rounded-lg text-accent'
 				onClick={() => window.location.reload()}
 			>
 				reload&nbsp;&#8634;
