@@ -20,7 +20,7 @@ const Options: React.FC<Props> = ({
 }) => {
 	return (
 		<div className='w-3/5 h-14'>
-			<ul className='w-full h-full flex justify-between items-center'>
+			<ul className='w-full h-full flex justify-between items-center font-montserrat'>
 				<li>
 					<TimeSelect
 						initialSeconds={initialSeconds}
