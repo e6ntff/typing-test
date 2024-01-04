@@ -5,6 +5,7 @@ import Options from './components/Options';
 import NoMobile from './components/NoMobile';
 import GameEnding from './components/GameEnding';
 import getWords from './utils/getWords';
+import ThemeWheel from './components/ThemeWheel';
 
 interface word {
 	text: string;
@@ -29,7 +30,7 @@ const App: React.FC = () => {
 		current: '',
 		next: [],
 	});
-	
+
 	useEffect(() => {
 		setIsStarted(false);
 		setRightWords(0);
@@ -58,6 +59,7 @@ const App: React.FC = () => {
 
 	return (
 		<>
+			<ThemeWheel />
 			<NoMobile />
 			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full bg-bg'>
 				<Header />
