@@ -59,9 +59,9 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<ThemeWheel />
 			<NoMobile />
-			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full bg-bg'>
+			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full'>
+				<ThemeWheel />
 				<Header />
 				{!isEnded ? (
 					<>
