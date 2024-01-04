@@ -16,19 +16,4 @@ body,
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@layer base {
-	html,
-	body.light {
-		--bg-color: #fff;
-		--main-color: #aaa;
-		--accent-color: #000;
-	}
-	html,
-	body.dark {
-		--bg-color: #000;
-		--main-color: #777;
-		--accent-color: #fff;
-	}
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Montserrat:wght@500;600;700&display=swap');
