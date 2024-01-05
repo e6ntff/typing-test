@@ -20,7 +20,7 @@ const GameEnding: React.FC<Props> = ({
 
 	return (
 		<div className='flex flex-col gap-5 items-center'>
-			<span className='text-3xl text-accent transition-all'>
+			<span className='text-3xl text-accent transition-all font-montserrat'>
 				You're typing {rightWordsPerMinute} words per minute with accuracy{' '}
 				{Math.round(accuracy * 100)}%
 			</span>
