@@ -42,9 +42,11 @@ const App: React.FC = () => {
 		setInitialSeconds(Number(localStorage.getItem('initSec') || 60));
 	}, []);
 
-	const saveRecord = (record: number) => {
-		setRecord(record);
-		localStorage.setItem('record', String(record));
+	const saveRecord = (newRecord: number) => {
+		if (newRecord > record) {
+			setRecord(newRecord);
+			localStorage.setItem('record', String(newRecord));
+		}
 	};
 
 	useEffect(() => {
