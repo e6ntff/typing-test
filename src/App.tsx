@@ -46,7 +46,7 @@ const App: React.FC = () => {
 		setRecord(record);
 		localStorage.setItem('record', String(record));
 	};
-	
+
 	useEffect(() => {
 		getWords().then(({ main, overlay }) => {
 			console.log('1');
@@ -86,9 +86,6 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<NoMobile />
-			<RecordScreen record={record} />
-			<ThemeWheel />
 			{isLoaded ? (
 				<>
 					<WordsOverlay words={overlayWords} />
@@ -122,6 +119,9 @@ const App: React.FC = () => {
 							/>
 						)}
 					</div>
+					<NoMobile />
+					<RecordScreen record={record} />
+					<ThemeWheel />
 				</>
 			) : (
 				<Preloader />
