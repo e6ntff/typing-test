@@ -43,9 +43,11 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 					{data.options.map((option: string, index: number) => (
 						<li
 							key={index}
-							className={`${
-								!isExpanded ? 'h-0' : ' border-x-4 last:border-4'
-							} h-full overflow-hidden transition-all border-accent px-1 last:border-t-0 last:rounded-b-xl last:box-content last:pb-1`}
+							className={`h-0 overflow-hidden transition-all border-accent px-1 last:border-transparent last:border-t-0 
+								last:rounded-b-xl last:box-content last:pb-1 ${
+									isExpanded &&
+									'h-full border-x-4 last:border-4 last:border-accent'
+								}`}
 						>
 							<button
 								className='relative transition-all 
