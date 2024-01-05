@@ -37,7 +37,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		setRecord(Number(localStorage.getItem('record')) || 0);
-		setInitialSeconds(Number(localStorage.getItem('initSec') || 60))
+		setInitialSeconds(Number(localStorage.getItem('initSec') || 60));
 	}, []);
 
 	const saveRecord = (record: number) => {
@@ -55,7 +55,8 @@ const App: React.FC = () => {
 	}, [initialSeconds]);
 
 	useEffect(() => {
-		getWords().then(({ overlay }) => {
+		getWords().then(({ main, overlay }) => {
+			setWordsData(main);
 			setOverlayWords(overlay);
 		});
 	}, []);
