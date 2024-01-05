@@ -36,18 +36,18 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 					className='w-full flex justify-between border-b-4 border-accent px-2 pb-1'
 				>
 					<span>{data.value}s</span>
-					<span className={`${!isExpanded && 'rotate-90'} transition-all`}>
+					<span className={`${!isExpanded && 'rotate-90'}`}>
 						˅
 					</span>
 				</button>
-				<ul className='w-full transition-all flex flex-col gap-1'>
+				<ul className='w-full flex flex-col gap-1'>
 					{data.options.map((option: string, index: number) => (
 						<li
 							key={index}
-							className='transition-all border-accent px-2'
+							className=' border-accent px-2'
 						>
 							<button
-								className='relative transition-all 
+								className='relative
 								before:w-0 before:absolute before:left-0 before:bottom-0 before:h-0.5 before:bg-accent hover:before:w-full before:transition-all '
 								onClick={() => setSeconds(index)}
 							>
