@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Theme {
 	name: string;
@@ -6,6 +6,8 @@ interface Theme {
 }
 
 const ThemeWheel: React.FC = () => {
+	const [rotation, setRotation] = useState<number>(0);
+
 	const themes: Theme[] = [
 		{
 			name: 'light',
@@ -33,9 +35,11 @@ const ThemeWheel: React.FC = () => {
 		setTheme(localStorage.getItem('theme') || 'light');
 	}, []);
 
-	const setTheme = (theme: string) => {
+	const setTheme = (theme: string, index: number = 0) => {
 		document.documentElement.setAttribute('data-theme', theme);
 		localStorage.setItem('theme', theme);
+
+		setRotation((3 - index) * 72);
 	};
 
 	return (
@@ -47,10 +51,10 @@ const ThemeWheel: React.FC = () => {
 						style={{
 							clipPath: 'url(#myClip)',
 							background: el.color,
-							rotate: `${72 * index}deg`,
+							rotate: `${72 * index + rotation}deg`,
 						}}
 						onClick={() => {
-							setTheme(el.name);
+							setTheme(el.name, index);
 						}}
 					></button>
 				</li>
