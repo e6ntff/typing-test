@@ -5,7 +5,7 @@ interface Props {
 }
 
 const WordsOverlay: React.FC<Props> = ({ words }) => {
-	const newWords: string[][] = words.slice(0, 300).reduce(
+	const newWords: string[][] = words.reduce(
 		(acc: string[][], word: string, index) => {
 			const firstIndex = index % 10;
 			const secondIndex = Math.floor(index / 10);
