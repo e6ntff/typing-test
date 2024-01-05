@@ -18,6 +18,7 @@ interface Props {
 	setAccuracy: (arg0: number) => void;
 	wordsData: words;
 	setWordsData: (arg0: any) => void;
+	initialSeconds: number;
 }
 
 const TextField: React.FC<Props> = ({
@@ -27,11 +28,20 @@ const TextField: React.FC<Props> = ({
 	setAccuracy,
 	wordsData,
 	setWordsData,
+	initialSeconds,
 }) => {
 	const [text, setText] = useState<word>({
 		text: '',
 		isRight: true,
 	});
+
+	useEffect(() => {
+		setText({
+			text: '',
+			isRight: true,
+		});
+	}, [initialSeconds]);
+
 	const [totalWords, setTotalWords] = useState<number>(0);
 
 	useEffect(() => {
