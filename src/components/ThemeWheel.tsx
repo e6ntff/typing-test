@@ -10,7 +10,7 @@ const ThemeWheel: React.FC = () => {
 
 	const themes: Theme[] = [
 		{
-			name: 'light',
+			name: 'lofi',
 			color: '#fff',
 		},
 		{
@@ -32,7 +32,7 @@ const ThemeWheel: React.FC = () => {
 	];
 
 	useEffect(() => {
-		setTheme(localStorage.getItem('theme') || 'light');
+		setTheme(localStorage.getItem('theme') || 'lofi');
 	}, []);
 
 	const setTheme = (theme: string, index: number = 0) => {
