@@ -47,7 +47,7 @@ const ThemeWheel: React.FC = () => {
 			{themes.map((el, index) => (
 				<li key={index}>
 					<button
-						className='absolute w-full h-full transition-all ease-in-out rounded-full hover:scale-110'
+						className='absolute w-full h-full ease-in-out rounded-full hover:scale-110 transition-all'
 						style={{
 							clipPath: 'url(#myClip)',
 							background: el.color,

@@ -6,7 +6,7 @@ interface Props {
 
 const TimeScreen: React.FC<Props> = ({ seconds }) => {
 	return (
-		<span className='font-semibold text-5xl text-accent'>{`${Math.floor(seconds / 60)
+		<span className='font-semibold text-5xl text-accent transition-all'>{`${Math.floor(seconds / 60)
 			.toString()
 			.padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`}</span>
 	);

@@ -15,16 +15,16 @@ const WordsOverlay: React.FC<Props> = ({ words }) => {
 		[[], [], [], [], [], [], [], [], [], []]
 	);
 	return (
-		<div className='absolute h-full w-full flex flex-col justify-between opacity-5 pointer-events-none'>
+		<div className='absolute h-full w-full flex flex-col justify-between opacity-5 pointer-events-none transition-all'>
 			{newWords.map((words: string[], index: number) => (
 				<div
 					key={index}
-					className='flex overflow-hidden items-center gap-4 animate-swim'
+					className='flex overflow-hidden items-center gap-4 animate-swim transition-all'
 				>
 					{words.map((word: string, index: number) => (
 						<p
 							key={index}
-							className='font-montserrat text-accent w-min font-bold'
+							className='font-montserrat text-accent w-min font-bold transition-all'
 							style={{ fontSize: `${Math.random() * 45 + 15}px` }}
 						>
 							{word}

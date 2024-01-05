@@ -20,13 +20,13 @@ const GameEnding: React.FC<Props> = ({
 
 	return (
 		<div className='flex flex-col gap-5 items-center'>
-			<span className='text-3xl text-accent'>
+			<span className='text-3xl text-accent transition-all'>
 				You're typing {rightWordsPerMinute} words per minute with accuracy{' '}
 				{Math.round(accuracy * 100)}%
 			</span>
 			<button
 				className='w-32 h-16 border-accent border-2 text-xl flex justify-center items-center
-				 uppercase font-montserrat font-semibold rounded-lg text-accent'
+				 uppercase font-montserrat font-semibold rounded-lg text-accent transition-all'
 				onClick={() => window.location.reload()}
 			>
 				reload&nbsp;&#8634;
