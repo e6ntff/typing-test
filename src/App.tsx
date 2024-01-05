@@ -7,6 +7,7 @@ import GameEnding from './components/GameEnding';
 import getWords from './utils/getWords';
 import ThemeWheel from './components/ThemeWheel';
 import RecordScreen from './components/RecordScreen';
+import WordsOverlay from './components/WordsOverlay';
 
 interface word {
 	text: string;
@@ -27,6 +28,7 @@ const App: React.FC = () => {
 	const [isEnded, setIsEnded] = useState<boolean>(false);
 	const [accuracy, setAccuracy] = useState<number>(1);
 	const [record, setRecord] = useState<number>(0);
+	const [overlayWords, setOverlayWords] = useState<string[]>([]);
 	const [wordsData, setWordsData] = useState<words>({
 		prev: [],
 		current: '',
@@ -38,7 +40,7 @@ const App: React.FC = () => {
 	}, []);
 
 	const saveRecord = (record: number) => {
-		setRecord(record)
+		setRecord(record);
 		localStorage.setItem('record', String(record));
 	};
 
@@ -46,7 +48,10 @@ const App: React.FC = () => {
 		setIsStarted(false);
 		setRightWords(0);
 		setSeconds(initialSeconds);
-		getWords().then(setWordsData);
+		getWords().then((data: any) => {
+			setWordsData(data.main);
+			setOverlayWords(data.overlay);
+		});
 	}, [initialSeconds]);
 
 	useEffect(() => {
@@ -70,6 +75,7 @@ const App: React.FC = () => {
 
 	return (
 		<>
+			<WordsOverlay words={overlayWords} />
 			<NoMobile />
 			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full'>
 				<RecordScreen record={record} />
