@@ -11,7 +11,7 @@ const getWords = async () => {
 				.get('https://random-word-api.herokuapp.com/word?number=200&length=5')
 				.then((data) => data.data),
 			await axios
-				.get('https://random-word-api.herokuap.com/word?number=200&length=6')
+				.get('https://random-word-api.herokuapp.com/word?number=200&length=6')
 				.then((data) => data.data),
 			await axios
 				.get('https://random-word-api.herokuapp.com/word?number=200&length=7')
