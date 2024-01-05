@@ -111,7 +111,7 @@ const TextField: React.FC<Props> = ({
 					className='absolute inset-0 w-full h-full font-montserrat font-normal text-5xl 
 					flex justify-start items-center text-nowrap overflow-hidden text-accent'
 				>
-					<span className='opacity-25'>{wordsData.current}</span>
+					<span className='opacity-40'>{wordsData.current}</span>
 					<span>&nbsp;{wordsData.next.join(' ')}</span>
 				</div>
 			</div>
