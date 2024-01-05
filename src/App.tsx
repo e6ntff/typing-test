@@ -8,6 +8,7 @@ import getWords from './utils/getWords';
 import ThemeWheel from './components/ThemeWheel';
 import RecordScreen from './components/RecordScreen';
 import WordsOverlay from './components/WordsOverlay';
+import Preloader from './components/Preloader';
 
 interface word {
 	text: string;
@@ -21,6 +22,7 @@ interface words {
 }
 
 const App: React.FC = () => {
+	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [initialSeconds, setInitialSeconds] = useState<number>(60);
 	const [seconds, setSeconds] = useState<number>(initialSeconds);
 	const [rightWords, setRightWords] = useState<number>(0);
@@ -44,6 +46,15 @@ const App: React.FC = () => {
 		setRecord(record);
 		localStorage.setItem('record', String(record));
 	};
+	
+	useEffect(() => {
+		getWords().then(({ main, overlay }) => {
+			console.log('1');
+			setIsLoaded(true);
+			setWordsData(main);
+			setOverlayWords(overlay);
+		});
+	}, []);
 
 	useEffect(() => {
 		setIsStarted(false);
@@ -53,13 +64,6 @@ const App: React.FC = () => {
 			setWordsData(main);
 		});
 	}, [initialSeconds]);
-
-	useEffect(() => {
-		getWords().then(({ main, overlay }) => {
-			setWordsData(main);
-			setOverlayWords(overlay);
-		});
-	}, []);
 
 	useEffect(() => {
 		const timerId = isStarted
@@ -82,40 +86,46 @@ const App: React.FC = () => {
 
 	return (
 		<>
-			<WordsOverlay words={overlayWords} />
 			<NoMobile />
-			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full'>
-				<RecordScreen record={record} />
-				<ThemeWheel />
-				<Header />
-				{!isEnded ? (
-					<>
-						<Options
-							seconds={seconds}
-							initialSeconds={initialSeconds}
-							setInitialSeconds={setInitialSeconds}
-							rightWords={rightWords}
-							accuracy={accuracy}
-						/>
-						<TextField
-							rightWords={rightWords}
-							setRightWords={setRightWords}
-							setIsStarted={setIsStarted}
-							setAccuracy={setAccuracy}
-							wordsData={wordsData}
-							setWordsData={setWordsData}
-							initialSeconds={initialSeconds}
-						/>
-					</>
-				) : (
-					<GameEnding
-						rightWords={rightWords}
-						accuracy={accuracy}
-						initialSeconds={initialSeconds}
-						saveRecord={saveRecord}
-					/>
-				)}
-			</div>
+			<RecordScreen record={record} />
+			<ThemeWheel />
+			{isLoaded ? (
+				<>
+					<WordsOverlay words={overlayWords} />
+					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full'>
+						<Header />
+						{!isEnded ? (
+							<>
+								<Options
+									seconds={seconds}
+									initialSeconds={initialSeconds}
+									setInitialSeconds={setInitialSeconds}
+									rightWords={rightWords}
+									accuracy={accuracy}
+								/>
+								<TextField
+									rightWords={rightWords}
+									setRightWords={setRightWords}
+									setIsStarted={setIsStarted}
+									setAccuracy={setAccuracy}
+									wordsData={wordsData}
+									setWordsData={setWordsData}
+									initialSeconds={initialSeconds}
+								/>
+							</>
+						) : (
+							<GameEnding
+								rightWords={rightWords}
+								accuracy={accuracy}
+								initialSeconds={initialSeconds}
+								saveRecord={saveRecord}
+							/>
+						)}
+					</div>
+				</>
+			) : (
+				<Preloader />
+			)}
 		</>
 	);
 };
