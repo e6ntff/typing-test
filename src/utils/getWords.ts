@@ -11,7 +11,7 @@ const getWords = async () => {
 				.get('https://random-word-api.herokuapp.com/word?number=200&length=5')
 				.then((data) => data.data),
 			await axios
-				.get('https://random-word-api.herokuapp.com/word?number=200&length=6')
+				.get('https://random-word-api.herokuap.com/word?number=200&length=6')
 				.then((data) => data.data),
 			await axios
 				.get('https://random-word-api.herokuapp.com/word?number=200&length=7')
@@ -29,14 +29,27 @@ const getWords = async () => {
 			overlay: data,
 		};
 	} catch (error) {
-		alert(error);
+		console.error(error)
 		return {
 			main: {
 				prev: [],
-				current: '',
-				next: [],
+				current: 'sorry',
+				next: [
+					'we',
+					'can',
+					'not',
+					'get',
+					'words',
+					'for',
+					'you',
+					'but',
+					'you',
+					'can',
+					'type',
+					'these',
+				],
 			},
-			overlay: [],
+			overlay: new Array(1000).fill('error'),
 		};
 	}
 };
