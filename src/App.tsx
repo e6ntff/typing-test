@@ -48,11 +48,16 @@ const App: React.FC = () => {
 		setIsStarted(false);
 		setRightWords(0);
 		setSeconds(initialSeconds);
-		getWords().then((data: any) => {
-			setWordsData(data.main);
-			setOverlayWords(data.overlay);
+		getWords().then(({ main }) => {
+			setWordsData(main);
 		});
 	}, [initialSeconds]);
+
+	useEffect(() => {
+		getWords().then(({ overlay }) => {
+			setOverlayWords(overlay);
+		});
+	}, []);
 
 	useEffect(() => {
 		const timerId = isStarted
