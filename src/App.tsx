@@ -6,6 +6,7 @@ import NoMobile from './components/NoMobile';
 import GameEnding from './components/GameEnding';
 import getWords from './utils/getWords';
 import ThemeWheel from './components/ThemeWheel';
+import RecordScreen from './components/RecordScreen';
 
 interface word {
 	text: string;
@@ -25,11 +26,21 @@ const App: React.FC = () => {
 	const [isStarted, setIsStarted] = useState<boolean>(false);
 	const [isEnded, setIsEnded] = useState<boolean>(false);
 	const [accuracy, setAccuracy] = useState<number>(1);
+	const [record, setRecord] = useState<number>(0);
 	const [wordsData, setWordsData] = useState<words>({
 		prev: [],
 		current: '',
 		next: [],
 	});
+
+	useEffect(() => {
+		setRecord(Number(localStorage.getItem('record')) || 0);
+	}, []);
+
+	const saveRecord = (record: number) => {
+		setRecord(record)
+		localStorage.setItem('record', String(record));
+	};
 
 	useEffect(() => {
 		setIsStarted(false);
@@ -61,6 +72,7 @@ const App: React.FC = () => {
 		<>
 			<NoMobile />
 			<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full'>
+				<RecordScreen record={record} />
 				<ThemeWheel />
 				<Header />
 				{!isEnded ? (
@@ -87,6 +99,7 @@ const App: React.FC = () => {
 						rightWords={rightWords}
 						accuracy={accuracy}
 						initialSeconds={initialSeconds}
+						saveRecord={saveRecord}
 					/>
 				)}
 			</div>
