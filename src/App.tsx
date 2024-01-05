@@ -49,7 +49,6 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		getWords().then(({ main, overlay }) => {
-			console.log('1');
 			setIsLoaded(true);
 			setWordsData(main);
 			setOverlayWords(overlay);
@@ -119,13 +118,13 @@ const App: React.FC = () => {
 							/>
 						)}
 					</div>
-					<NoMobile />
-					<RecordScreen record={record} />
-					<ThemeWheel />
 				</>
 			) : (
 				<Preloader />
 			)}
+			<NoMobile />
+			<RecordScreen record={record} />
+			<ThemeWheel />
 		</>
 	);
 };
