@@ -24,12 +24,12 @@ const getWords = async () => {
 			main: {
 				prev: [],
 				current: data[0],
-				next: data.slice(1),
+				next: mixWords(data.slice(1)),
 			},
-			overlay: data,
+			overlay: mixWords(data),
 		};
 	} catch (error) {
-		console.error(error)
+		console.error(error);
 		return {
 			main: {
 				prev: [],
