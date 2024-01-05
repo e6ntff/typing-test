@@ -13,7 +13,7 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 	};
 
 	return (
-		<div className='h-full w-36 flex items-center text-3xl font-semibold text-accent'>
+		<div className='h-full w-28 flex items-center text-3xl font-semibold text-accent'>
 			<span>🕑</span>
 			<select
 				value={initialSeconds.toString()}
