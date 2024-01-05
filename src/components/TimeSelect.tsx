@@ -6,14 +6,18 @@ interface Props {
 }
 
 const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
+	const setSeconds = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		const seconds = parseInt(event.target.value);
+		setInitialSeconds(seconds);
+		localStorage.setItem('initSec', String(seconds));
+	};
+
 	return (
 		<div className='h-full w-36 flex items-center text-3xl font-semibold text-accent'>
 			<span>🕑</span>
 			<select
 				value={initialSeconds.toString()}
-				onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-					setInitialSeconds(parseInt(event.target.value))
-				}
+				onChange={setSeconds}
 				className='w-full h-full bg-transparent rounded-xl border-2 border-solid border-accent'
 			>
 				<option

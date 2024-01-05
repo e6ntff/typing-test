@@ -37,6 +37,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		setRecord(Number(localStorage.getItem('record')) || 0);
+		setInitialSeconds(Number(localStorage.getItem('initSec') || 60))
 	}, []);
 
 	const saveRecord = (record: number) => {
