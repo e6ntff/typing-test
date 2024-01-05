@@ -24,30 +24,27 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 	};
 
 	return (
-		<div className='h-full flex items-center text-3xl font-semibold text-accent bg-transparent'>
-			<span>🕑</span>
+		<div className='h-14 w-32 flex items-center text-4xl font-semibold text-accent bg-transparent relative'>
 			<div
-				className={`w-24 h-full rounded-xl border-4 border-solid border-accent relative bg-transparent transition-all
-			${isExpanded && 'rounded-b-none border-b-0 border-b-transparent'}`}
+				className={`absolute left-0 top-0 py-1 h-full w-full rounded-xl border-4 border-solid border-accent 
+					bg-transparent transition-all overflow-hidden ${
+					isExpanded && 'h-48'
+				} flex flex-col gap-1`}
 			>
 				<button
 					onClick={toggleList}
-					className='w-full h-full flex justify-between px-1'
+					className='w-full flex justify-between border-b-4 border-accent px-2 pb-1'
 				>
 					<span>{data.value}s</span>
 					<span className={`${!isExpanded && 'rotate-90'} transition-all`}>
 						˅
 					</span>
 				</button>
-				<ul className='h-full w-24 -ms-1 absolute left-0 top-full transition-all'>
+				<ul className='w-full transition-all flex flex-col gap-1'>
 					{data.options.map((option: string, index: number) => (
 						<li
 							key={index}
-							className={`h-0 overflow-hidden transition-all border-accent px-1 last:border-accent last:border-t-0 
-								last:rounded-b-xl last:box-content last:pb-1 ${
-									isExpanded &&
-									'h-full border-x-4 last:border-4'
-								}`}
+							className='transition-all border-accent px-2'
 						>
 							<button
 								className='relative transition-all 
