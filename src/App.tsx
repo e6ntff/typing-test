@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Header from './components/Header';
+import Title from './components/Title';
 import TextField from './components/TextField';
 import Options from './components/Options';
 import NoMobile from './components/NoMobile';
 import GameEnding from './components/GameEnding';
 import getWords from './utils/getWords';
-import ThemeWheel from './components/ThemeWheel';
-import RecordScreen from './components/RecordScreen';
 import WordsOverlay from './components/WordsOverlay';
 import Preloader from './components/Preloader';
 import Keyboard from './components/Keyboard';
+import Header from './components/Header';
 
 interface word {
 	text: string;
@@ -32,7 +31,7 @@ const App: React.FC = () => {
 	const [accuracy, setAccuracy] = useState<number>(1);
 	const [record, setRecord] = useState<number>(0);
 	const [overlayWords, setOverlayWords] = useState<string[]>([]);
-	const [isKeyboard, setIsKeyboard] = useState<boolean>(true);
+	const [isKeyboard, setIsKeyboard] = useState<boolean>(false);
 	const [wordsData, setWordsData] = useState<words>({
 		prev: [],
 		current: '',
@@ -93,7 +92,7 @@ const App: React.FC = () => {
 				<>
 					{isKeyboard ? <Keyboard /> : <WordsOverlay words={overlayWords} />}
 					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all pb-44'>
-						<Header />
+						<Title />
 						{!isEnded ? (
 							<>
 								<Options
@@ -127,8 +126,11 @@ const App: React.FC = () => {
 				<Preloader />
 			)}
 			<NoMobile />
-			<RecordScreen record={record} />
-			<ThemeWheel />
+			<Header
+				record={record}
+				isKeyboard={isKeyboard}
+				setIsKeyboard={setIsKeyboard}
+			/>
 		</>
 	);
 };

@@ -1,10 +1,23 @@
 import React from 'react';
+import Info from './Info';
+import ThemeWheel from './ThemeWheel';
 
-const Header: React.FC = () => {
+interface Props {
+	record: number;
+	isKeyboard: boolean;
+	setIsKeyboard: (arg0: (arg0: boolean) => boolean) => void;
+}
+
+const Header: React.FC<Props> = ({ record, isKeyboard, setIsKeyboard }) => {
 	return (
-		<h1 className='font-montserrat font-bold text-7xl text-accent transition-all pointer-events-none select-none'>
-			Test your typing skills
-		</h1>
+		<header className='absolute hidden lg:flex justify-between px-10 py-10 w-full h-min inset-0'>
+			<Info
+				record={record}
+				isKeyboard={isKeyboard}
+				setIsKeyboard={setIsKeyboard}
+			/>
+			<ThemeWheel />
+		</header>
 	);
 };
 
