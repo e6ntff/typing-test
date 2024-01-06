@@ -5,19 +5,19 @@ const getWords = async () => {
 	try {
 		const data = [
 			await axios
-				.get('https://random-word-api.herokuapp.com/word?number=100&length=4')
+				.get('https://random-word-api.herokuapp.com/word?number=50&length=4')
 				.then((data) => data.data),
 			await axios
-				.get('https://random-word-api.herokuapp.com/word?number=100&length=5')
+				.get('https://random-word-api.herokuapp.com/word?number=50&length=5')
 				.then((data) => data.data),
 			await axios
-				.get('https://random-word-api.herokuapp.com/word?number=100&length=6')
+				.get('https://random-word-api.herokuapp.com/word?number=50&length=6')
 				.then((data) => data.data),
 			await axios
-				.get('https://random-word-api.herokuapp.com/word?number=100&length=7')
+				.get('https://random-word-api.herokuapp.com/word?number=50&length=7')
 				.then((data) => data.data),
 			await axios
-				.get('https://random-word-api.herokuapp.com/word?number=100&length=8')
+				.get('https://random-word-api.herokuapp.com/word?number=50&length=8')
 				.then((data) => data.data),
 		].flat(Infinity);
 		return {
