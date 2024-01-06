@@ -9,6 +9,7 @@ import ThemeWheel from './components/ThemeWheel';
 import RecordScreen from './components/RecordScreen';
 import WordsOverlay from './components/WordsOverlay';
 import Preloader from './components/Preloader';
+import Keyboard from './components/Keyboard';
 
 interface word {
 	text: string;
@@ -31,6 +32,7 @@ const App: React.FC = () => {
 	const [accuracy, setAccuracy] = useState<number>(1);
 	const [record, setRecord] = useState<number>(0);
 	const [overlayWords, setOverlayWords] = useState<string[]>([]);
+	const [isKeyboard, setIsKeyboard] = useState<boolean>(true);
 	const [wordsData, setWordsData] = useState<words>({
 		prev: [],
 		current: '',
@@ -89,8 +91,8 @@ const App: React.FC = () => {
 		<>
 			{isLoaded ? (
 				<>
-					<WordsOverlay words={overlayWords} />
-					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all'>
+					{isKeyboard ? <Keyboard /> : <WordsOverlay words={overlayWords} />}
+					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all pb-44'>
 						<Header />
 						{!isEnded ? (
 							<>
