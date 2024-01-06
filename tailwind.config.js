@@ -9,6 +9,11 @@ module.exports = {
 			animation: {
 				swim: 'swim 300s linear infinite',
 			},
+			width: {
+				30: '7.5rem',
+				space: '41.5rem',
+			},
+			height: { 30: '7.5rem' },
 			keyframes: {
 				swim: {
 					'0%, 100%': { marginLeft: '0' },
