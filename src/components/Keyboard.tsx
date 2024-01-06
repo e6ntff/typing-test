@@ -75,7 +75,7 @@ const Keyboard: React.FC = () => {
 									justify-center items-center font-montserrat text-5xl uppercase transition-all duration-75 ${
 										key.symbol === ' ' && 'w-space'
 									} ${key.symbol === 'Backspace' && 'w-64'} 
-									${key.active[0] ? 'opacity-15' : 'opacity-5'}`}
+									${key.active[0] ? 'opacity-10 scale-105' : 'opacity-5 scale-100'}`}
 							>
 								{key.symbol === 'Backspace' ? '←' : key.symbol}
 							</span>
