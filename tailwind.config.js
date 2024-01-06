@@ -7,12 +7,12 @@ module.exports = {
 				montserrat: ['Montserrat', 'sans-serif'],
 			},
 			animation: {
-				swim: 'swim 600s linear infinite',
+				swim: 'swim 300s linear infinite',
 			},
 			keyframes: {
 				swim: {
 					'0%, 100%': { marginLeft: '0' },
-					'50%': { marginLeft: '-5000px' },
+					'50%': { marginLeft: '-1500px' },
 				},
 			},
 		},
