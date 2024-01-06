@@ -90,7 +90,7 @@ const App: React.FC = () => {
 			{isLoaded ? (
 				<>
 					<WordsOverlay words={overlayWords} />
-					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all overflow-hidden'>
+					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all'>
 						<Header />
 						{!isEnded ? (
 							<>
