@@ -9,7 +9,7 @@ const OverlayCheckbox: React.FC<Props> = ({ isKeyboard, setIsKeyboard }) => {
 	return (
 		<div
 			className='w-32 h-14 text-4xl flex justify-center items-center select-none uppercase 
-				font-montserrat font-semibold cursor-pointer border-4 border-accent rounded-xl'
+				font-montserrat font-semibold cursor-pointer border-4 border-accent rounded-xl text-accent'
 			onClick={() => {
 				setIsKeyboard((prev: boolean) => !prev);
 			}}
