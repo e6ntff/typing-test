@@ -91,7 +91,7 @@ const App: React.FC = () => {
 			{isLoaded ? (
 				<>
 					{isKeyboard ? <Keyboard /> : <WordsOverlay words={overlayWords} />}
-					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all pb-44'>
+					<div className='hidden lg:flex flex-col justify-center items-center gap-10 w-full h-full transition-all'>
 						<Title />
 						{!isEnded ? (
 							<>
