@@ -6,7 +6,7 @@ interface Props {
 
 const RecordScreen: React.FC<Props> = ({ record }) => {
 	return (
-		<span className='absolute top-5 left-5 font-montserrat text-3xl font-semibold text-accent transition-all'>
+		<span className='absolute top-5 left-5 font-montserrat text-3xl font-semibold text-accent transition-all select-none'>
 			Record: {record} wpm
 		</span>
 	);

@@ -24,7 +24,7 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 	};
 
 	return (
-		<div className='h-14 w-32 flex items-center text-4xl font-semibold text-accent bg-transparent relative'>
+		<div className='h-14 w-32 flex items-center text-4xl font-semibold text-accent bg-transparent relative select-none'>
 			<div
 				className={`absolute left-0 top-0 py-1 w-full rounded-xl border-4 border-solid border-accent overflow-hidden
 					bg-transparent transition-all h-14 ${

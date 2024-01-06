@@ -83,7 +83,7 @@ const TextField: React.FC<Props> = ({
 	};
 
 	return (
-		<label className='w-full h-16 flex'>
+		<label className='w-full h-16 flex select-none'>
 			<div
 				className='w-1/2 h-full flex justify-end items-center 
 				font-montserrat font-normal text-5xl text-accent transition-all'
