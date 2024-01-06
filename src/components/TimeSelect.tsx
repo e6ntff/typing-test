@@ -48,7 +48,7 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 						>
 							<button
 								className='relative
-								before:w-0 before:absolute before:left-0 before:bottom-0 before:h-1 before:bg-accent hover:before:w-full before:transition-all '
+								before:w-0 before:absolute before:rounded-xl before:left-0 before:bottom-0 before:h-1 before:bg-accent hover:before:w-full before:transition-all'
 								onClick={() => setSeconds(index)}
 							>
 								{option}
