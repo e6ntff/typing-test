@@ -29,14 +29,14 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 				className={`absolute left-0 top-0 py-1 w-full rounded-xl border-4 border-solid border-accent overflow-hidden
 					bg-transparent transition-all h-14 ${
 					isExpanded && 'h-48'
-				} flex flex-col gap-1`}
+				} flex flex-col gap-0.5`}
 			>
 				<button
 					onClick={toggleList}
 					className='w-full flex justify-between border-b-4 border-accent px-2 pb-1'
 				>
 					<span>{data.value}s</span>
-					<span className={`${!isExpanded && 'rotate-90'}`}>
+					<span className={`rotate-0 ${!isExpanded && 'rotate-90'} transition-all`}>
 						˅
 					</span>
 				</button>
@@ -44,11 +44,11 @@ const TimeSelect: React.FC<Props> = ({ initialSeconds, setInitialSeconds }) => {
 					{data.options.map((option: string, index: number) => (
 						<li
 							key={index}
-							className=' border-accent px-2'
+							className='border-accent px-2'
 						>
 							<button
 								className='relative
-								before:w-0 before:absolute before:left-0 before:bottom-0 before:h-0.5 before:bg-accent hover:before:w-full before:transition-all '
+								before:w-0 before:absolute before:left-0 before:bottom-0 before:h-1 before:bg-accent hover:before:w-full before:transition-all '
 								onClick={() => setSeconds(index)}
 							>
 								{option}
