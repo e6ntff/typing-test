@@ -43,7 +43,7 @@ const ThemeWheel: React.FC = () => {
 	};
 
 	return (
-		<ul className='absolute right-5 top-5 border border-neutral w-20 h-20 rounded-full'>
+		<ul className='absolute right-10 top-10 border border-neutral w-20 h-20 rounded-full'>
 			{themes.map((el, index) => (
 				<li key={index}>
 					<button
