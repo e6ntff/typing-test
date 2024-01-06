@@ -40,6 +40,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		setRecord(Number(localStorage.getItem('record')) || 0);
+		setIsKeyboard(Boolean(localStorage.getItem('keys')));
 		setInitialSeconds(Number(localStorage.getItem('initSec') || 60));
 	}, []);
 
@@ -81,10 +82,6 @@ const App: React.FC = () => {
 			clearInterval(timerId);
 		};
 	}, [isStarted, seconds]);
-
-	useEffect(() => {
-		setSeconds(initialSeconds);
-	}, [initialSeconds]);
 
 	return (
 		<>
