@@ -9,6 +9,8 @@ interface Props {
 	setInitialSeconds: (arg0: number) => void;
 	rightWords: number;
 	accuracy: number;
+	isGameInfinite: boolean;
+	setIsGameInfinite: (arg0: boolean) => void;
 }
 
 const Options: React.FC<Props> = ({
@@ -17,6 +19,8 @@ const Options: React.FC<Props> = ({
 	setInitialSeconds,
 	rightWords,
 	accuracy,
+	isGameInfinite,
+	setIsGameInfinite,
 }) => {
 	return (
 		<div className='w-3/5 h-14'>
@@ -25,6 +29,7 @@ const Options: React.FC<Props> = ({
 					<TimeSelect
 						initialSeconds={initialSeconds}
 						setInitialSeconds={setInitialSeconds}
+						setIsGameInfinite={setIsGameInfinite}
 					/>
 				</li>
 				<li>
@@ -33,9 +38,11 @@ const Options: React.FC<Props> = ({
 						accuracy={accuracy}
 					/>
 				</li>
-				<li>
-					<TimeScreen seconds={seconds} />
-				</li>
+				{!isGameInfinite && (
+					<li>
+						<TimeScreen seconds={seconds} />
+					</li>
+				)}
 			</ul>
 		</div>
 	);

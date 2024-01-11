@@ -25,6 +25,7 @@ const App: React.FC = () => {
 	const [isLoaded, setIsLoaded] = useState<boolean>(false);
 	const [initialSeconds, setInitialSeconds] = useState<number>(60);
 	const [seconds, setSeconds] = useState<number>(initialSeconds);
+	const [isGameInfinite, setIsGameInfinite] = useState<boolean>(false);
 	const [rightWords, setRightWords] = useState<number>(0);
 	const [isStarted, setIsStarted] = useState<boolean>(false);
 	const [isEnded, setIsEnded] = useState<boolean>(false);
@@ -37,6 +38,17 @@ const App: React.FC = () => {
 		current: '',
 		next: [],
 	});
+
+	useEffect(() => {
+		if (wordsData.next.length <= 5 && isLoaded) {
+			getWords().then(({ main }) => {
+				setWordsData((prevWords: words) => ({
+					...prevWords,
+					next: [...prevWords.next.slice(0, 5), ...main.next],
+				}));
+			});
+		}
+	}, [wordsData]);
 
 	useEffect(() => {
 		setRecord(Number(localStorage.getItem('record')) || 0);
@@ -60,6 +72,10 @@ const App: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
+		if (initialSeconds === Infinity) {
+			setIsGameInfinite(true);
+		}
+
 		setIsStarted(false);
 		setRightWords(0);
 		setSeconds(initialSeconds);
@@ -69,11 +85,12 @@ const App: React.FC = () => {
 	}, [initialSeconds]);
 
 	useEffect(() => {
-		const timerId = isStarted
-			? setInterval(() => {
-					setSeconds((prev: number) => prev - 1);
-			  }, 1000)
-			: '';
+		const timerId =
+			isStarted && !isGameInfinite
+				? setInterval(() => {
+						setSeconds((prev: number) => prev - 1);
+				  }, 1000)
+				: '';
 		if (seconds === 0) {
 			clearInterval(timerId);
 			setIsEnded(true);
@@ -98,6 +115,8 @@ const App: React.FC = () => {
 									setInitialSeconds={setInitialSeconds}
 									rightWords={rightWords}
 									accuracy={accuracy}
+									isGameInfinite={isGameInfinite}
+									setIsGameInfinite={setIsGameInfinite}
 								/>
 								<TextField
 									rightWords={rightWords}
