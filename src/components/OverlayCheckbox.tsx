@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 interface Props {
 	isKeyboard: boolean;
@@ -6,12 +6,12 @@ interface Props {
 }
 
 const OverlayCheckbox: React.FC<Props> = ({ isKeyboard, setIsKeyboard }) => {
-	const setOverlay = () => {
+	const setOverlay = useCallback(() => {
 		setIsKeyboard((prev: boolean) => {
 			localStorage.setItem('keys', !prev ? 'keys' : '');
 			return !prev;
 		});
-	};
+	}, [setIsKeyboard]);
 
 	return (
 		<div

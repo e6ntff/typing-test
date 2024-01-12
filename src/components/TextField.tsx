@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface word {
 	text: string;
@@ -13,7 +13,7 @@ interface words {
 
 interface Props {
 	rightWords: number;
-	setRightWords: any;
+	setRightWords: (arg0: (arg0: number) => number) => void;
 	setIsStarted: (arg0: boolean) => void;
 	setAccuracy: (arg0: number) => void;
 	wordsData: words;
@@ -55,32 +55,43 @@ const TextField: React.FC<Props> = ({
 		return true;
 	};
 
-	const changeText = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setIsStarted(true);
-		if (event.target.value !== ' ') {
-			if (event.target.value.at(-1) === ' ') {
-				setWordsData((prevData: words) => ({
-					prev: [...prevData.prev, text],
-					current: prevData.next[0],
-					next: prevData.next.slice(1),
-				}));
-				setText({
-					text: '',
-					isRight: true,
-				});
-				setRightWords(
-					(prev: number) => prev + (wordsData.current === text.text ? 1 : 0)
-				);
-				setTotalWords((prev: number) => prev + 1);
-			} else {
-				setText({
-					text: event.target.value,
-					isRight: isWordRight(event.target.value, wordsData.current),
-				});
-				setText((prevText) => ({ ...prevText, text: event.target.value }));
+	const changeText = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			setIsStarted(true);
+			if (event.target.value !== ' ') {
+				if (event.target.value.at(-1) === ' ') {
+					setWordsData((prevData: words) => ({
+						prev: [...prevData.prev, text],
+						current: prevData.next[0],
+						next: prevData.next.slice(1),
+					}));
+					setText({
+						text: '',
+						isRight: true,
+					});
+					setRightWords(
+						(prev: number) => prev + (wordsData.current === text.text ? 1 : 0)
+					);
+					setTotalWords((prev: number) => prev + 1);
+				} else {
+					setText({
+						text: event.target.value,
+						isRight: isWordRight(event.target.value, wordsData.current),
+					});
+					setText((prevText) => ({ ...prevText, text: event.target.value }));
+				}
 			}
-		}
-	};
+		},
+		[
+			setIsStarted,
+			setWordsData,
+			setText,
+			setRightWords,
+			setTotalWords,
+			text,
+			wordsData,
+		]
+	);
 
 	return (
 		<label className='w-full h-16 flex select-none'>
@@ -91,7 +102,9 @@ const TextField: React.FC<Props> = ({
 				{wordsData.prev.map((el) => (
 					<span
 						key={Math.random()}
-						className={`opacity-50 ${!el.isRight && 'line-through'} transition-all`}
+						className={`opacity-50 ${
+							!el.isRight && 'line-through'
+						} transition-all`}
 					>
 						{el.text}&nbsp;
 					</span>

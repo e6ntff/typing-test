@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 
 interface key {
 	symbol: string;
@@ -59,7 +59,6 @@ const Keyboard: React.FC = () => {
 		keys.slice(20, 27),
 		[keys[27]],
 	];
-
 	return (
 		<div className='absolute inset-0 w-full h-full -z-10 flex justify-center items-center pointer-events-none overflow-hidden'>
 			<div className='flex flex-col gap-4'>

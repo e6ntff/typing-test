@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 interface Props {
 	initialSeconds: number;
@@ -24,14 +24,13 @@ const TimeSelect: React.FC<Props> = ({
 		setIsGameInfinite(options[index] === '∞');
 		setInitialSeconds(seconds);
 		setCurrentValue(options[index]);
-		console.log(currentValue);
 		localStorage.setItem('initSec', String(seconds));
 		toggleList();
 	};
 
-	const toggleList = () => {
+	const toggleList = useCallback(() => {
 		setIsExpanded((prevValue: boolean) => !prevValue);
-	};
+	}, []);
 
 	return (
 		<div className='h-14 w-32 flex items-center text-4xl font-semibold text-accent bg-transparent relative select-none'>

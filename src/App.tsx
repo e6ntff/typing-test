@@ -48,7 +48,7 @@ const App: React.FC = () => {
 				}));
 			});
 		}
-	}, [wordsData]);
+	}, [wordsData, isLoaded]);
 
 	useEffect(() => {
 		setRecord(Number(localStorage.getItem('record')) || 0);
@@ -98,7 +98,7 @@ const App: React.FC = () => {
 		return () => {
 			clearInterval(timerId);
 		};
-	}, [isStarted, seconds]);
+	}, [isStarted, seconds, isGameInfinite]);
 
 	return (
 		<>
