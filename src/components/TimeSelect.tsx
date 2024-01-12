@@ -14,7 +14,9 @@ const TimeSelect: React.FC<Props> = ({
 	const options: string[] = ['60s', '30s', '15s', '∞'];
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
-	const [currentValue, setCurrentValue] = useState<string>(options[0]);
+	const [currentValue, setCurrentValue] = useState<string>(
+		initialSeconds === Infinity ? '∞' : `${initialSeconds}s`
+	);
 
 	const setSeconds = (index: number) => {
 		const seconds =
@@ -22,6 +24,7 @@ const TimeSelect: React.FC<Props> = ({
 		setIsGameInfinite(options[index] === '∞');
 		setInitialSeconds(seconds);
 		setCurrentValue(options[index]);
+		console.log(currentValue);
 		localStorage.setItem('initSec', String(seconds));
 		toggleList();
 	};
