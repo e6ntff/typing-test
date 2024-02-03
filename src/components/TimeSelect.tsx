@@ -1,16 +1,10 @@
+import { observer } from 'mobx-react-lite';
 import React, { useCallback, useState } from 'react';
+import Store from '../utils/store';
 
-interface Props {
-	initialSeconds: number;
-	setInitialSeconds: (arg0: number) => void;
-	setIsGameInfinite: (arg0: boolean) => void;
-}
+const TimeSelect: React.FC = observer(() => {
+	const { initialSeconds, setInitialSeconds } = Store;
 
-const TimeSelect: React.FC<Props> = ({
-	initialSeconds,
-	setInitialSeconds,
-	setIsGameInfinite,
-}) => {
 	const options: string[] = ['60s', '30s', '15s', '∞'];
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -21,7 +15,6 @@ const TimeSelect: React.FC<Props> = ({
 	const setSeconds = (index: number) => {
 		const seconds =
 			options[index] === '∞' ? Infinity : parseInt(options[index]);
-		setIsGameInfinite(options[index] === '∞');
 		setInitialSeconds(seconds);
 		setCurrentValue(options[index]);
 		localStorage.setItem('initSec', String(seconds));
@@ -70,6 +63,6 @@ const TimeSelect: React.FC<Props> = ({
 			</div>
 		</div>
 	);
-};
+});
 
 export default TimeSelect;

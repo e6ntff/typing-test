@@ -3,45 +3,19 @@ import RecordScreen from './RecordScreen';
 import OverlayCheckbox from './OverlayCheckbox';
 import TrainingCheckbox from './TrainingCheckbox';
 import TrainingKeyboard from './TrainingKeyboard';
+import Store from '../utils/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-	record: number;
-	isKeyboard: boolean;
-	setIsKeyboard: (arg0: (arg0: boolean) => boolean) => void;
-	isTrainingMode: boolean;
-	setIsTrainingMode: (arg0: (arg0: boolean) => boolean) => void;
-	selectedSymbols: string[];
-	setSelectedSymbols: (arg0: string[]) => void;
-}
-
-const Info: React.FC<Props> = ({
-	record,
-	isKeyboard,
-	setIsKeyboard,
-	isTrainingMode,
-	setIsTrainingMode,
-	selectedSymbols,
-	setSelectedSymbols,
-}) => {
+const Info: React.FC = observer(() => {
+	const { isTrainingMode } = Store;
 	return (
 		<div className='flex gap-5 items-center'>
-			<RecordScreen record={record} />
-			<OverlayCheckbox
-				isKeyboard={isKeyboard}
-				setIsKeyboard={setIsKeyboard}
-			/>
-			<TrainingCheckbox
-				isTrainingMode={isTrainingMode}
-				setIsTrainingMode={setIsTrainingMode}
-			/>
-			{isTrainingMode && (
-				<TrainingKeyboard
-					selectedSymbols={selectedSymbols}
-					setSelectedSymbols={setSelectedSymbols}
-				/>
-			)}
+			<RecordScreen />
+			<OverlayCheckbox />
+			<TrainingCheckbox />
+			{isTrainingMode && <TrainingKeyboard />}
 		</div>
 	);
-};
+});
 
 export default Info;

@@ -1,20 +1,13 @@
+import { observer } from 'mobx-react-lite';
 import React, { useCallback } from 'react';
+import Store from '../utils/store';
 
-interface Props {
-	isTrainingMode: boolean;
-	setIsTrainingMode: (arg0: (arg0: boolean) => boolean) => void;
-}
+const TrainingCheckbox: React.FC = observer(() => {
+	const { isTrainingMode, toggleIsTrainingMode } = Store;
 
-const TrainingCheckbox: React.FC<Props> = ({
-	isTrainingMode,
-	setIsTrainingMode,
-}) => {
 	const setMode = useCallback(() => {
-		setIsTrainingMode((prev: boolean) => {
-			localStorage.setItem('mode', !prev ? 'train' : 'chill');
-			return !prev;
-		});
-	}, [setIsTrainingMode]);
+		toggleIsTrainingMode();
+	}, [toggleIsTrainingMode]);
 
 	return (
 		<div
@@ -27,6 +20,6 @@ const TrainingCheckbox: React.FC<Props> = ({
 			</span>
 		</div>
 	);
-};
+});
 
 export default TrainingCheckbox;

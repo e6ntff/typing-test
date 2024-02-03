@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
+import Store from '../utils/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-	rightWords: number;
-	accuracy: number;
-	initialSeconds: number;
-	saveRecord: (arg0: number) => void;
-}
+const GameEnding: React.FC = observer(() => {
+	const { rightWords, accuracy, initialSeconds, record, setRecord } = Store;
 
-const GameEnding: React.FC<Props> = ({
-	rightWords,
-	accuracy,
-	initialSeconds,
-	saveRecord,
-}) => {
+	const saveRecord = (newRecord: number) => {
+		if (newRecord > record) {
+			setRecord(newRecord);
+			localStorage.setItem('record', String(newRecord));
+		}
+	};
+
 	const rightWordsPerMinute = rightWords * (60 / initialSeconds);
 	useEffect(() => {
 		saveRecord(rightWordsPerMinute);
@@ -33,6 +32,6 @@ const GameEnding: React.FC<Props> = ({
 			</button>
 		</div>
 	);
-};
+});
 
 export default GameEnding;

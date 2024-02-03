@@ -5,15 +5,7 @@ interface key {
 	active: [boolean, Dispatch<SetStateAction<boolean>>];
 }
 
-interface Props {
-	selectedSymbols: string[];
-	setSelectedSymbols: (arg0: string[]) => void;
-}
-
-const TrainingKeyboard: React.FC<Props> = ({
-	selectedSymbols,
-	setSelectedSymbols,
-}) => {
+const TrainingKeyboard: React.FC = () => {
 	const keys: key[] = [
 		{ symbol: 'Backspace', active: useState<boolean>(true) },
 		{ symbol: 'q', active: useState<boolean>(true) },

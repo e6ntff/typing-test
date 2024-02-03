@@ -1,35 +1,18 @@
+import { observer } from 'mobx-react-lite';
 import React, { useCallback, useEffect, useState } from 'react';
+import Store, { word, words } from '../utils/store';
 
-interface word {
-	text: string;
-	isRight: boolean;
-}
+const TextField: React.FC = observer(() => {
+	const {
+		wordsData,
+		setWordsData,
+		initialSeconds,
+		rightWords,
+		setRightWords,
+		setIsStarted,
+		setAccuracy,
+	} = Store;
 
-interface words {
-	prev: word[];
-	current: string;
-	next: string[];
-}
-
-interface Props {
-	rightWords: number;
-	setRightWords: (arg0: (arg0: number) => number) => void;
-	setIsStarted: (arg0: boolean) => void;
-	setAccuracy: (arg0: number) => void;
-	wordsData: words;
-	setWordsData: (arg0: any) => void;
-	initialSeconds: number;
-}
-
-const TextField: React.FC<Props> = ({
-	rightWords,
-	setRightWords,
-	setIsStarted,
-	setAccuracy,
-	wordsData,
-	setWordsData,
-	initialSeconds,
-}) => {
 	const [text, setText] = useState<word>({
 		text: '',
 		isRight: true,
@@ -60,18 +43,16 @@ const TextField: React.FC<Props> = ({
 			setIsStarted(true);
 			if (event.target.value !== ' ') {
 				if (event.target.value.at(-1) === ' ') {
-					setWordsData((prevData: words) => ({
-						prev: [...prevData.prev, text],
-						current: prevData.next[0],
-						next: prevData.next.slice(1),
-					}));
+					setWordsData({
+						prev: [...wordsData.prev, text],
+						current: wordsData.next[0],
+						next: wordsData.next.slice(1),
+					});
 					setText({
 						text: '',
 						isRight: true,
 					});
-					setRightWords(
-						(prev: number) => prev + (wordsData.current === text.text ? 1 : 0)
-					);
+					setRightWords(rightWords + (wordsData.current === text.text ? 1 : 0));
 					setTotalWords((prev: number) => prev + 1);
 				} else {
 					setText({
@@ -130,6 +111,6 @@ const TextField: React.FC<Props> = ({
 			</div>
 		</label>
 	);
-};
+});
 
 export default TextField;

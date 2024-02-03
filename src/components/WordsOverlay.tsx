@@ -1,11 +1,10 @@
+import { observer } from 'mobx-react-lite';
 import React, { memo } from 'react';
+import Store from '../utils/store';
 
-interface Props {
-	words: string[];
-}
-
-const WordsOverlay: React.FC<Props> = ({ words }) => {
-	const newWords: string[][] = words.reduce(
+const WordsOverlay: React.FC = observer(() => {
+	const { overlayWords } = Store;
+	const newWords: string[][] = overlayWords.reduce(
 		(acc: string[][], word: string, index) => {
 			const firstIndex = index % 10;
 			const secondIndex = Math.floor(index / 10);
@@ -34,6 +33,6 @@ const WordsOverlay: React.FC<Props> = ({ words }) => {
 			))}
 		</div>
 	);
-};
+});
 
 export default memo(WordsOverlay);

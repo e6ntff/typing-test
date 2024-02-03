@@ -2,50 +2,28 @@ import React from 'react';
 import TimeScreen from './TimeScreen';
 import TimeSelect from './TimeSelect';
 import WordsScreen from './WordsScreen';
+import Store from '../utils/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-	seconds: number;
-	initialSeconds: number;
-	setInitialSeconds: (arg0: number) => void;
-	rightWords: number;
-	accuracy: number;
-	isGameInfinite: boolean;
-	setIsGameInfinite: (arg0: boolean) => void;
-}
-
-const Options: React.FC<Props> = ({
-	seconds,
-	initialSeconds,
-	setInitialSeconds,
-	rightWords,
-	accuracy,
-	isGameInfinite,
-	setIsGameInfinite,
-}) => {
+const Options: React.FC = observer(() => {
+	const { isGameInfinite } = Store;
 	return (
 		<div className='w-3/5 h-14'>
 			<ul className='w-full h-full flex justify-between items-center font-montserrat'>
 				<li>
-					<TimeSelect
-						initialSeconds={initialSeconds}
-						setInitialSeconds={setInitialSeconds}
-						setIsGameInfinite={setIsGameInfinite}
-					/>
+					<TimeSelect />
 				</li>
 				<li>
-					<WordsScreen
-						rightWords={rightWords}
-						accuracy={accuracy}
-					/>
+					<WordsScreen />
 				</li>
 				{!isGameInfinite && (
 					<li>
-						<TimeScreen seconds={seconds} />
+						<TimeScreen />
 					</li>
 				)}
 			</ul>
 		</div>
 	);
-};
+});
 
 export default Options;

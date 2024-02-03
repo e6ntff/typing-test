@@ -1,17 +1,13 @@
+import { observer } from 'mobx-react-lite';
 import React, { useCallback } from 'react';
+import Store from '../utils/store';
 
-interface Props {
-	isKeyboard: boolean;
-	setIsKeyboard: (arg0: (arg0: boolean) => boolean) => void;
-}
+const OverlayCheckbox: React.FC = observer(() => {
+	const { isKeyboard, toggleIsKeyboard } = Store;
 
-const OverlayCheckbox: React.FC<Props> = ({ isKeyboard, setIsKeyboard }) => {
 	const setOverlay = useCallback(() => {
-		setIsKeyboard((prev: boolean) => {
-			localStorage.setItem('keys', !prev ? 'keys' : '');
-			return !prev;
-		});
-	}, [setIsKeyboard]);
+		toggleIsKeyboard();
+	}, [toggleIsKeyboard]);
 
 	return (
 		<div
@@ -24,6 +20,6 @@ const OverlayCheckbox: React.FC<Props> = ({ isKeyboard, setIsKeyboard }) => {
 			</span>
 		</div>
 	);
-};
+});
 
 export default OverlayCheckbox;
