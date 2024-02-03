@@ -16,7 +16,7 @@ const GameEnding: React.FC<Props> = ({
 	const rightWordsPerMinute = rightWords * (60 / initialSeconds);
 	useEffect(() => {
 		saveRecord(rightWordsPerMinute);
-	}, []);
+	}, [rightWordsPerMinute, saveRecord]);
 
 	return (
 		<div className='flex flex-col gap-5 items-center select-none'>

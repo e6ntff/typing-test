@@ -33,6 +33,8 @@ const App: React.FC = () => {
 	const [record, setRecord] = useState<number>(0);
 	const [overlayWords, setOverlayWords] = useState<string[]>([]);
 	const [isKeyboard, setIsKeyboard] = useState<boolean>(false);
+	const [isTrainingMode, setIsTrainingMode] = useState<boolean>(false);
+	const [selectedSymbols, setSelectedSymbols] = useState<string[]>([]);
 	const [wordsData, setWordsData] = useState<words>({
 		prev: [],
 		current: '',
@@ -146,6 +148,10 @@ const App: React.FC = () => {
 				record={record}
 				isKeyboard={isKeyboard}
 				setIsKeyboard={setIsKeyboard}
+				isTrainingMode={isTrainingMode}
+				setIsTrainingMode={setIsTrainingMode}
+				selectedSymbols={selectedSymbols}
+				setSelectedSymbols={setSelectedSymbols}
 			/>
 		</>
 	);
